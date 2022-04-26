@@ -1,20 +1,11 @@
-/*
-4.	Egy számítógép vagy kliensként vagy szerverként működik. 
-Csak egy szerver létezik, amire be tudnak jelentkezni a kliensek. 
-Minden gépnek MAC címe van, amire most bármilyen egyedi azonosító jó lesz! 
-A MAC cím nem változik, de a klienseken létre lehet hozni lokális  felhasználókat.
-Ez egy folyamatosan bővülő lista. 
-Kliens nem jöhet létre felhasználó nélkül, de lehetőség van egyszerre több felhasználóval is létrehozni.
-Minden felhasználónak van joga, ami változhat, 0..4 közötti számmal jelöljük. 
-A kliens legyen másolható, és tudjuk archiválni az állapotát!
-Amikor „létrejön” egy kliens, akkor aktualizálja magát, ha van létező archívum.
-*/ 
+
 import java.util.ArrayList;
 import java.io.File;  
 import java.io.IOException; 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
-import java.time.LocalDateTime;    
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 class Archiver{
@@ -31,9 +22,9 @@ class Archiver{
     
     }
 
-    public void addServerComputer(String mac, String name, int numberOfUsers, Boolean isServer) {
+    public void addServerComputer(String name, int numberOfUsers, Boolean isServer) {
         server = new Computer();
-        server.setMacAddress(mac);
+        server.setMacAddress(UUID.randomUUID().toString());//random uuid
         server.setName(name);
         server.setNumberOfUsers(numberOfUsers);
         server.setIsServer(isServer);    
@@ -48,7 +39,7 @@ class Archiver{
         clients.add(c);
     }
 
-    public void addUser(String username, String permission){
+    public void addUser(String username, Integer permission){
         ClientUsers u = new ClientUsers();
         u.setUsername(username);
         u.setPermission(permission);
